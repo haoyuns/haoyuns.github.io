@@ -20,8 +20,11 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 1,
+    maxZoom: 6,
     center: [44.562281, 6.256811]
 });
+
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 
 
