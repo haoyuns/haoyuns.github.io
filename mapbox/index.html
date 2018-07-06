@@ -28,35 +28,21 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 map.on('load', function () {
-    map.addSource('sample', {
-        type: 'vector',
-        url: 'mapbox://hsw98.69eiitp5'
-    });
+    
     map.addLayer({
         'id': 'sample',
         'type': 'circle',
-        'source': 'sample',
+        'source': {
+            type: 'vector',
+            url: 'mapbox://hsw98.69eiitp5'
+        },
+        'source-layer': 'Sample-7u1z39',
         'layout': {
             'visibility': 'visible'
-        },
-        'source-layer': 'Sample-7u1z39'
+        }
+        
     });
 
-
-map.on('click', 'sample', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
-    var description = e.features[0].properties.description;
-
-    // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-
-    new mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(description)
-        .addTo(map);
-});
 
 // Change the cursor to a pointer when the mouse is over the places layer.
 map.on('mouseenter', 'sample', function () {
