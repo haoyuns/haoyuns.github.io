@@ -27,32 +27,6 @@ var map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-map.on('load', function () {
-    
-    map.addLayer({
-        'id': 'sample',
-        'type': 'circle',
-        'source': {
-            type: 'vector',
-            url: 'mapbox://hsw98.69eiitp5'
-        },
-        'source-layer': 'Sample-7u1z39',
-        'layout': {
-            'visibility': 'visible'
-        }
-        
-    });
-
-
-// Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'sample', function () {
-    map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'sample', function () {
-    map.getCanvas().style.cursor = '';
-});
 
 </script>
 
