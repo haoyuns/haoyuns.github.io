@@ -18,10 +18,13 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/hsw98/ciszprmi0000g2wnagdavfow9',
+    style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 15,
     center: [121.479995, 31.265759]
 });
+
+
+
 
 map.on('click', 'places', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
