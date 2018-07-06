@@ -20,16 +20,30 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 1,
+    minZoom:1,
     maxZoom: 6,
     center: [44.562281, 6.256811]
 });
 
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
+map.on('load', function () {
+    map.addSource('sample', {
+        type: 'vector',
+        url: 'mapbox://hsw98.69eiitp5'
+    });
+    map.addLayer({
+        'id': 'sample',
+        'type': 'circle',
+        'source': 'sample',
+        'layout': {
+            'visibility': 'visible'
+        },
+        'source-layer': 'Sample-7u1z39'
+    });
 
 
-
-map.on('click', 'places', function (e) {
+map.on('click', 'sample', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var description = e.features[0].properties.description;
 
@@ -45,12 +59,12 @@ map.on('click', 'places', function (e) {
 });
 
 // Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'places', function () {
+map.on('mouseenter', 'sample', function () {
     map.getCanvas().style.cursor = 'pointer';
 });
 
 // Change it back to a pointer when it leaves.
-map.on('mouseleave', 'places', function () {
+map.on('mouseleave', 'sample', function () {
     map.getCanvas().style.cursor = '';
 });
 
