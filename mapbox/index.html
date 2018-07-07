@@ -9,11 +9,13 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        #popup { background-color: #222; }
     </style>
 </head>
 
 <body>
 <div id='map'></div>
+<pre id='popup'></pre>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
@@ -78,7 +80,7 @@ map.on('click', function(e) {
     // based on the feature found
     var popup = new mapboxgl.Popup()
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5><p>Country: ' + feature.properties['country'] + ' <br /> Date: ' + feature.properties['date'] + ' <br /> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <p><b> Detail:</b><br />Country: ' + feature.properties['country'] + ' <br /> Date: ' + feature.properties['date'] + ' <br /> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
     .addTo(map);
 });
 
