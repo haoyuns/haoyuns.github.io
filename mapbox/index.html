@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>style-test</title>
+    <title>pop-test</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -21,9 +21,9 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 1.2,
-    minZoom:1,
+    minZoom:1.2,
     maxZoom: 4,
-    center: [88.505238, 30.746952]
+    center: [75.497426, 12.211180]
 });
 
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -78,7 +78,7 @@ map.on('click', function(e) {
     // based on the feature found
     var popup = new mapboxgl.Popup()
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5><p>Country: ' + feature.properties['country'] + ' </p><p> Date: ' + feature.properties['date'] + ' </p><p> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5><p>Country: ' + feature.properties['country'] + ' <br /> Date: ' + feature.properties['date'] + ' <br /> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
     .addTo(map);
 });
 
