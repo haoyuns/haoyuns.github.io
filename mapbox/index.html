@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>pop-test</title>
+    <title>popup-test</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
-        #popup { background-color: #222; }
+        .popup { background-color: #222; }
     </style>
 </head>
 
@@ -23,9 +23,9 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 1.2,
-    minZoom:1.2,
+    minZoom:1,
     maxZoom: 4,
-    center: [75.497426, 12.211180]
+    center: [55.855436, 23.142000]
 });
 
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
