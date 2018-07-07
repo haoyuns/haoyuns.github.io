@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Displacements</title>
+    <title>Radius-test</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -46,7 +46,18 @@ map.on('load', function () {
                 'Conflict', '#f9f15d',
                 'Disaster', '#61fffc',
                 /* other */ '#063a5b'
-            ]
+            ],
+            'circle-opacity':0.6,
+            'circle-radius':{
+                property: 'figure',
+                stops:[
+                    [0,2],
+                    [10000,4],
+                    [100000,10],
+                    [200000,14],
+                    [400000,20]
+                ]
+            }
         }
     });
 });
