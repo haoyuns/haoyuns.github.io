@@ -2,19 +2,66 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>popup-test</title>
+    <title>Displacements</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(50, 50, 50, 0.6);
+            margin-top: 20px;
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+            overflow: auto;
+            border-radius: 5px;
+        }
+        #legend {
+            padding: 0 0px 20px 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 1);
+            color: #fff;
+            font-size: 13px;
+            line-height: 18px;
+            height: 80px;
+            width: 150px;
+        }
+
+        .legend-key {
+            display: inline-block;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            margin-right: 5px;
+        }
+
+        .mapboxgl-popup-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            font-size: 13px;
+            line-height: 20px;
+            padding: 0 15px 0 15px;
+            max-width: 400px;
+        }
+        .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+            border-top-color: rgba(255, 255, 255, 0.95);
+        }
+
+        #calign {
+            text-align: center;
+        }
+
+
+
     </style>
 </head>
 
 <body>
 <div id='map'></div>
-<pre id='popup'></pre>
+<div class='map-overlay' id='legend'><p><b>Displacement Type</b></p><p></p></div>
+
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
@@ -24,12 +71,29 @@ var map = new mapboxgl.Map({
     zoom: 1.2,
     minZoom:1,
     maxZoom: 4,
-    center: [32.595413, 16.142000]
+    center: [23.430407, 10.828358]
 });
 
-map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 
 map.on('load', function () {
+    var infos = ['Conflict', 'Disaster'];
+    var colors = ['#f9f15d', '#61fffc'];
+
+    for (i = 0; i < infos.length; i++) {
+        var info = infos[i];
+        var color = colors[i];
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        var value = document.createElement('span');
+        value.innerHTML = info;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+    }
 
     map.addLayer({
         'id': 'sample',
@@ -49,7 +113,7 @@ map.on('load', function () {
                 'Disaster', '#61fffc',
                 /* other */ '#063a5b'
             ],
-            'circle-opacity':0.7,
+            'circle-opacity':0.6,
             'circle-radius': {
                 property: 'figure',
                 stops:[
