@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Popup-test</title>
+    <title>mouse-test</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -18,6 +18,7 @@
 
 <body>
 <div id='map'></div>
+
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
 var map = new mapboxgl.Map({
@@ -52,7 +53,7 @@ map.on('load', function () {
                 /* other */ '#063a5b'
             ],
             'circle-opacity':0.6,
-            'circle-radius':{
+            'circle-radius': {
                 property: 'figure',
                 stops:[
                     [0,2],
@@ -66,28 +67,6 @@ map.on('load', function () {
     });
 });
 
-map.on('click', function(e) {
-
-    var features = map.queryRenderedFeatures(e.point, { layers: ['Sample-7u1z39'] });
-
-    // if the features have no info, return nothing
-    if (!features.length) {
-        return;
-    }
-
-    var feature = features[0];
-
-    // Populate the popup and set its coordinates
-    // based on the feature found
-    var popup = new mapboxgl.Popup()
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5>' +
-    '<ul class=\'list-group\'>' +
-    '<li class=\'list-group-item\'> Country: ' + feature.properties['country'] + ' </li>' +
-    '<li class=\'list-group-item\'> Date: ' + feature.properties['date'] + ' </li>' +
-    '<li class=\'list-group-item\'> Displacement cases: ' + feature.properties['figure'] + ' </li></ul></div>')
-    .addTo(map);
-});
 
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'
