@@ -78,10 +78,7 @@ map.on('click', function(e) {
     // based on the feature found
     var popup = new mapboxgl.Popup()
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10; max-width: 400px; font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;\'> <h5> Detail: </h5>' +
-    '<p> Country: ' + feature.properties['country'] + ' </p>' +
-    '<p> Date: ' + feature.properties['date'] + ' </p>' +
-    '<p> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10; max-width: 400px; font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;\'> <h5> Detail: </h5><p>Country: ' + feature.properties['country'] + ' </p><p> Date: ' + feature.properties['date'] + ' </p><p> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
     .addTo(map);
 });
 
