@@ -9,28 +9,21 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
-        #popup {
-            .popup {
-                max-width: 400px;
-                font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-            }
-        }
     </style>
 </head>
 
 <body>
 <div id='map'></div>
-<div id='popup' class="popup"></div>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
-    zoom: 1,
+    zoom: 1.2,
     minZoom:1,
     maxZoom: 4,
-    center: [44.562281, 6.256811]
+    center: [88.505238, 30.746952]
 });
 
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -85,11 +78,10 @@ map.on('click', function(e) {
     // based on the feature found
     var popup = new mapboxgl.Popup()
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5>' +
-    '<ul class=\'list-group\'>' +
-    '<li class=\'list-group-item\'> Country: ' + feature.properties['country'] + ' </li>' +
-    '<li class=\'list-group-item\'> Date: ' + feature.properties['date'] + ' </li>' +
-    '<li class=\'list-group-item\'> Displacement cases: ' + feature.properties['figure'] + ' </li></ul></div>')
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10; max-width: 400px; font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;\'> <h5> Detail: </h5>' +
+    '<p> Country: ' + feature.properties['country'] + ' </p>' +
+    '<p> Date: ' + feature.properties['date'] + ' </p>' +
+    '<p> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
     .addTo(map);
 });
 
