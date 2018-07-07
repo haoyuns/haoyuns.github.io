@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>mousemove-test</title>
+    <title>click-test</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -26,7 +26,7 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 1,
     minZoom:1,
-    maxZoom: 6,
+    maxZoom: 4,
     center: [44.562281, 6.256811]
 });
 
@@ -39,7 +39,7 @@ map.on('load', function () {
         'type': 'circle',
         'source': {
             type: 'vector',
-            url: 'mapbox://hsw98.69eiitp5'//mapbox://hsw98.69eiitp5
+            url: 'mapbox://hsw98.69eiitp5'
         },
         'source-layer': 'Sample-7u1z39',
         'paint': {           
@@ -52,7 +52,7 @@ map.on('load', function () {
                 'Disaster', '#61fffc',
                 /* other */ '#063a5b'
             ],
-            'circle-opacity':0.6,
+            'circle-opacity':0.7,
             'circle-radius': {
                 property: 'figure',
                 stops:[
@@ -67,9 +67,9 @@ map.on('load', function () {
     });
 });
 
-map.on('mousemove', function(e) {
+map.on('click', function(e) {
 
-    var features = map.queryRenderedFeatures(e.point, { layers: ['Sample-7u1z39'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['sample'] });
 
     // if the features have no info, return nothing
     if (!features.length) {
@@ -90,6 +90,10 @@ map.on('mousemove', function(e) {
     .addTo(map);
 });
 
+map.on('mousemove', function(e) {
+  var features = map.queryRenderedFeatures(e.point, { layers: ['sample'] });
+  map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
 
 
 </script>
