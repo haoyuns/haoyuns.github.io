@@ -34,20 +34,18 @@ map.on('load', function () {
         'type': 'circle',
         'source': {
             type: 'vector',
-            url: 'mapbox://examples.8fgz4egr'
+            url: 'mapbox://tilesets/hsw98/69eiitp5'
         },
-        'source-layer': 'sf2010',
+        'source-layer': 'sample-7u1z39',
         'paint': {           
             // color circles by ethnicity, using a match expression
             // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
             'circle-color': [
                 'match',
-                ['get', 'ethnicity'],
-                'White', '#fbb03b',
-                'Black', '#223b53',
-                'Hispanic', '#e55e5e',
-                'Asian', '#3bb2d0',
-                /* other */ '#ccc'
+                ['get', 'displacement_type'],
+                'Conflict', '#f9f15d',
+                'Disaster', '#61fffc',
+                /* other */ '#063a5b'
             ]
         }
     });
