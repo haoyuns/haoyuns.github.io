@@ -62,6 +62,35 @@ map.on('load', function () {
     });
 });
 
+map.on('click', function(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['Sample-7u1z39'] });
+
+    // if the features have no info, return nothing
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    // Populate the popup and set its coordinates
+    // based on the feature found
+    var popup = new mapboxgl.Popup()
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5>' +
+    '<ul class=\'list-group\'>' +
+    '<li class=\'list-group-item\'> Country: ' + feature.properties['country'] + ' </li>' +
+    '<li class=\'list-group-item\'> Date: ' + feature.properties['date'] + ' </li>' +
+    '<li class=\'list-group-item\'> Displacement cases: ' + feature.properties['figure'] + ' </li></ul></div>')
+    .addTo(map);
+});
+
+// Use the same approach as above to indicate that the symbols are clickable
+// by changing the cursor style to 'pointer'
+map.on('mousemove', function(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['Sample-7u1z39'] });
+    map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+
 
 </script>
 
