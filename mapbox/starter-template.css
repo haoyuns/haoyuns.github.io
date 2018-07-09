@@ -46,3 +46,8 @@ body {
 	max-width: 720px;
 	margin: 20px auto;
 }
+
+hr {
+	width: 100%;
+	max-width: 720px;
+}
