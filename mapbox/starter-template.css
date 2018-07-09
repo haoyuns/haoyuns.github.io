@@ -1,7 +1,38 @@
 body {
-  padding-top: 5rem;
+	padding-top: 1.5rem;
+	font-family: Georgia,Times,"Times New Roman",serif;
 }
+
 .starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+	padding: 3rem 0;
+	text-align: center;
+}
+
+.starter-template h1 {
+	font-size: 34px;
+	width: 50%; 
+	margin: 0px auto;
+}
+
+.starter-template .lead {
+	font-size: 17px;
+	line-height: 27px;
+	width: 40%; 
+	margin: 15px auto;
+	text-align: left;
+	color: #333333;
+}
+
+.content {
+	font-size: 17px;
+	line-height: 26px;
+	width: 40%; 
+	margin: 10px auto;
+	text-align: left;
+	color: #333333;
+}
+
+.content-lg {
+	max-width: 720px;
+	margin: 20px auto;
 }
