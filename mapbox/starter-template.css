@@ -11,7 +11,7 @@ body {
 .starter-template h1 {
 	font-size: 35px;
 	line-height: 44px;
-	width: 50%; 
+	width: 45%; 
 	margin: 0px auto;
 }
 
@@ -19,7 +19,7 @@ body {
 	font-size: 17px;
 	line-height: 26px;
 	width: 40%; 
-	margin: 15px auto 30px auto;
+	margin: 15px auto 40px auto;
 	text-align: left;
 	color: #333333;
 }
