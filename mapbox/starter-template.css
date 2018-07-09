@@ -4,36 +4,45 @@ body {
 }
 
 .starter-template {
-	padding: 3rem 0;
+	padding: 3rem 0.5rem 0 0.5rem;
 	text-align: center;
 }
 
 .starter-template h1 {
 	font-size: 35px;
 	line-height: 44px;
-	width: 45%; 
-	margin: 0px auto;
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .starter-template .lead {
 	font-size: 17px;
 	line-height: 26px;
-	width: 40%; 
+	width: 100%;
+	max-width: 450px;
 	margin: 15px auto 40px auto;
 	text-align: left;
 	color: #333333;
 }
 
+.content-template {
+	padding: 0 0.5rem;
+	text-align: center;
+}
+
 .content {
 	font-size: 17px;
 	line-height: 26px;
-	width: 40%; 
+	width: 100%;
+	max-width: 450px;
 	margin: 10px auto;
 	text-align: left;
 	color: #333333;
 }
 
 .content-lg {
+	width: 100%;
 	max-width: 720px;
 	margin: 20px auto;
 }
