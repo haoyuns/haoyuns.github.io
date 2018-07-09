@@ -9,16 +9,17 @@ body {
 }
 
 .starter-template h1 {
-	font-size: 34px;
+	font-size: 35px;
+	line-height: 44px;
 	width: 50%; 
 	margin: 0px auto;
 }
 
 .starter-template .lead {
 	font-size: 17px;
-	line-height: 27px;
+	line-height: 26px;
 	width: 40%; 
-	margin: 15px auto;
+	margin: 15px auto 30px auto;
 	text-align: left;
 	color: #333333;
 }
