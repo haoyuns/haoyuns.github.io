@@ -22,14 +22,42 @@
             background-color: white;
         }
 
+        .session { margin-bottom: 20px; }
+        .row { height: 12px; width: 100%; }
+        .colors {
+            background: linear-gradient(to right, #2dc4b2, #3bb3c3, #669ec4, #8b88b6, #a2719b, #aa5e79);
+            margin-bottom: 5px;
+        }
+
+        .label {
+            width: 15%;
+            display: inline-block;
+            text-align: center;
+        }
+
     </style>
 </head>
 
 <body>
 <div id='map'></div>
+
 <div id='console'>
   <h1>Internal Displacements 2008-2017</h1>
   <p>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a> test</p>
+</div>
+
+<div class='session'>
+  <h2>Displacement cases</h2>
+  <div class='row colors'>
+  </div>
+  <div class='row labels'>
+    <div class='label'>0</div>
+    <div class='label'>1</div>
+    <div class='label'>2</div>
+    <div class='label'>3</div>
+    <div class='label'>4</div>
+    <div class='label'>5+</div>
+  </div>
 </div>
 
 
@@ -73,17 +101,7 @@ map.on('load', function () {
             url: 'mapbox://hsw98.69eiitp5'
         },
         'source-layer': 'Sample-7u1z39',
-        'paint': {           
-            // color circles by ethnicity, using a match expression
-            // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
-            'circle-color': [
-                'match',
-                ['get', 'displacement_type'],
-                'Conflict', '#f9f15d',
-                'Disaster', '#61fffc',
-                /* other */ '#063a5b'
-            ],
-            'circle-opacity':0.6,
+        'paint': {
             'circle-radius': {
                 property: 'figure',
                 stops:[
@@ -93,7 +111,17 @@ map.on('load', function () {
                     [200000,14],
                     [400000,20]
                 ]
-            }
+            },
+            // color circles by ethnicity, using a match expression
+            // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+            'circle-color': [
+                'match',
+                ['get', 'displacement_type'],
+                'Conflict', '#f9f15d',
+                'Disaster', '#61fffc',
+                /* other */ '#063a5b'
+            ],
+            'circle-opacity':0.6
         }
     });
 });
