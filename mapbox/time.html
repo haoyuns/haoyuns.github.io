@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Displacements</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        
+        h1 { font-size: 18px; line-height: 24px; }
+        h2 { font-size: 14px; line-height: 20px; margin-bottom: 10px; }
+        a { text-decoration: none; color: #2dc4b2; }
+
+        #console {
+            position: absolute;
+            width: 220px;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id='map'></div>
+<div id='console'>
+  <h1>Internal Displacements 2008-2017</h1>
+  <p>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a> test</p>
+</div>
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/hsw98/cj498zjq22ml92sqgv7o0goy6',
+    zoom: 1.2,
+    minZoom:1.2,
+    maxZoom: 4,
+    center: [23.430407, 10.828358]
+});
+
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
+
+map.on('load', function () {
+    var infos = ['Conflict', 'Disaster'];
+    var colors = ['#f9f15d', '#61fffc'];
+
+    for (i = 0; i < infos.length; i++) {
+        var info = infos[i];
+        var color = colors[i];
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        var value = document.createElement('span');
+        value.innerHTML = info;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+    }
+
+    map.addLayer({
+        'id': 'sample',
+        'type': 'circle',
+        'source': {
+            type: 'vector',
+            url: 'mapbox://hsw98.69eiitp5'
+        },
+        'source-layer': 'Sample-7u1z39',
+        'paint': {           
+            // color circles by ethnicity, using a match expression
+            // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+            'circle-color': [
+                'match',
+                ['get', 'displacement_type'],
+                'Conflict', '#f9f15d',
+                'Disaster', '#61fffc',
+                /* other */ '#063a5b'
+            ],
+            'circle-opacity':0.6,
+            'circle-radius': {
+                property: 'figure',
+                stops:[
+                    [0,2],
+                    [10000,4],
+                    [100000,10],
+                    [200000,14],
+                    [400000,20]
+                ]
+            }
+        }
+    });
+});
+
+map.on('click', function(e) {
+
+    var features = map.queryRenderedFeatures(e.point, { layers: ['sample'] });
+
+    // if the features have no info, return nothing
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    // Populate the popup and set its coordinates
+    // based on the feature found
+    var popup = new mapboxgl.Popup()
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <p><b> Detail:</b><br />Country: ' + feature.properties['country'] + ' <br /> Date: ' + feature.properties['date'] + ' <br /> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
+    .addTo(map);
+});
+
+map.on('mousemove', function(e) {
+  var features = map.queryRenderedFeatures(e.point, { layers: ['sample'] });
+  map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+
+
+</script>
+
+</body>
+</html>
