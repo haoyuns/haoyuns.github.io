@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Displacements</title>
+    <title>10 Years of Global Internal Displacements</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -16,13 +16,14 @@
 
         #console {
             position: absolute;
-            width: 220px;
+            width: 240px;
             margin: 10px;
             padding: 10px 20px;
             background-color: white;
         }
 
         .session { margin-bottom: 20px; }
+
         .row { height: 12px; width: 100%; }
         .colors {
             background: linear-gradient(to right, #2dc4b2, #3bb3c3, #669ec4, #8b88b6, #a2719b, #aa5e79);
@@ -42,30 +43,35 @@
 <div id='map'></div>
 
 <div id='console'>
-  <h1>Internal Displacements 2008-2017</h1>
-  <p>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a> test</p>
+    <h1>Internal Displacements 2008-2017</h1>
+    <p>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a> test</p>
+
+    <div class='session' id='sliderbar'>
+        <h2>Year: <label id='active-year'>2008</label></h2>
+        <input id='slider' class='row' type='range' min='2008' max='2017' step='1' value='2008' />
+    </div>
+
+    <div class='session'>
+        <h2>Type</h2>
+        <div class='row' id='filters'>
+            <input id='all' type='radio' name='toggle' value='all' checked='checked'>
+            <label for='all'>All</label>
+            <input id='weekday' type='radio' name='toggle' value='weekday'>
+            <label for='weekday'>Conflicts</label>
+            <input id='weekend' type='radio' name='toggle' value='weekend'>
+            <label for='weekend'>Disasters</label>
+        </div>
+    </div>
+
 </div>
 
-<div class='session'>
-  <h2>Displacement cases</h2>
-  <div class='row colors'>
-  </div>
-  <div class='row labels'>
-    <div class='label'>0</div>
-    <div class='label'>1</div>
-    <div class='label'>2</div>
-    <div class='label'>3</div>
-    <div class='label'>4</div>
-    <div class='label'>5+</div>
-  </div>
-</div>
 
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRseXcxNCJ9.1h5sGCIL0Pig6OmgZdDBMg';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/hsw98/cj498zjq22ml92sqgv7o0goy6',
+    style: 'mapbox://styles/hsw98/cjj9zcydo2wsn2rto637xw9bb',
     zoom: 1.2,
     minZoom:1.2,
     maxZoom: 4,
@@ -75,80 +81,55 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 
 map.on('load', function () {
-    var infos = ['Conflict', 'Disaster'];
-    var colors = ['#f9f15d', '#61fffc'];
-
-    for (i = 0; i < infos.length; i++) {
-        var info = infos[i];
-        var color = colors[i];
-        var item = document.createElement('div');
-        var key = document.createElement('span');
-        key.className = 'legend-key';
-        key.style.backgroundColor = color;
-
-        var value = document.createElement('span');
-        value.innerHTML = info;
-        item.appendChild(key);
-        item.appendChild(value);
-        legend.appendChild(item);
-    }
 
     map.addLayer({
         'id': 'sample',
         'type': 'circle',
         'source': {
             type: 'vector',
-            url: 'mapbox://hsw98.69eiitp5'
+            url: 'mapbox://hsw98.63hk0ehh'
         },
-        'source-layer': 'Sample-7u1z39',
+        'source-layer': 'time-4c01td',
         'paint': {
             'circle-radius': {
                 property: 'figure',
                 stops:[
                     [0,2],
-                    [10000,4],
-                    [100000,10],
-                    [200000,14],
-                    [400000,20]
+                    [100000,4],
+                    [200000,8],
+                    [500000,14],
+                    [1000000,18],
+                    [5000000,22],
+                    [10000000,30]
                 ]
             },
             // color circles by ethnicity, using a match expression
             // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
             'circle-color': [
                 'match',
-                ['get', 'displacement_type'],
-                'Conflict', '#f9f15d',
-                'Disaster', '#61fffc',
+                ['get', 'type'],
+                'conflict new', '#f9f15d',
+                'disaster new', '#61fffc',
                 /* other */ '#063a5b'
             ],
-            'circle-opacity':0.6
-        }
+            'circle-opacity':0.8
+        },
+        'filter': ['==', ['number', ['get', 'year']], 2008]
+
     });
+
+    document.getElementById('slider').addEventListener('input', function(e) {
+        var year = parseInt(e.target.value);
+        // update the map
+        map.setFilter('sample', ['==', ['number', ['get', 'year']], year]);
+
+        // update text in the UI
+        document.getElementById('active-year').innerText = year;
+    });
+
+
 });
 
-map.on('click', function(e) {
-
-    var features = map.queryRenderedFeatures(e.point, { layers: ['sample'] });
-
-    // if the features have no info, return nothing
-    if (!features.length) {
-        return;
-    }
-
-    var feature = features[0];
-
-    // Populate the popup and set its coordinates
-    // based on the feature found
-    var popup = new mapboxgl.Popup()
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <p><b> Detail:</b><br />Country: ' + feature.properties['country'] + ' <br /> Date: ' + feature.properties['date'] + ' <br /> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
-    .addTo(map);
-});
-
-map.on('mousemove', function(e) {
-  var features = map.queryRenderedFeatures(e.point, { layers: ['sample'] });
-  map.getCanvas().style.cursor = features.length ? 'pointer' : '';
-});
 
 
 </script>
