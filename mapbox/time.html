@@ -16,19 +16,27 @@
 
         #console {
             position: absolute;
-            width: 240px;
+            width: 230px;
             margin: 10px;
             padding: 10px 20px;
             background-color: white;
+            color: #222;
+            font-size: 14px;
+            line-height: 19px;
         }
 
         .session { margin-bottom: 20px; }
 
-        .row { height: 12px; width: 100%; }
-        .colors {
-            background: linear-gradient(to right, #2dc4b2, #3bb3c3, #669ec4, #8b88b6, #a2719b, #aa5e79);
-            margin-bottom: 5px;
+        .legend-key {
+            display: inline-block;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            margin-right: 8px;
         }
+
+        .row { height: 12px; width: 100%; }
+        
 
         .label {
             width: 15%;
@@ -43,14 +51,18 @@
 <div id='map'></div>
 
 <div id='console'>
-    <h1>Internal Displacements 2008-2017</h1>
-    <p>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a> test</p>
+    <h1>10 Years of Internal Displacement</h1>
+    <p>A total of 40 million people remained internally displaced by conflict as of the end of 2017.<br />Meanwhile, there were 18.8 million new internal displacements associated with disasters in 135 countries and territories.</p>
+
+    <div id='legend'><p><b>Displacement Type</b></p></div>
 
     <div class='session' id='sliderbar'>
-        <h2>Year: <label id='active-year'>2008</label></h2>
-        <input id='slider' class='row' type='range' min='2008' max='2017' step='1' value='2008' />
+        <h2>Year: <label id='active-year'>2017</label></h2>
+        <input id='slider' class='row' type='range' min='2008' max='2017' step='1' value='2017' />
     </div>
+    <p><i>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a></i></p>
 
+<!--
     <div class='session'>
         <h2>Type</h2>
         <div class='row' id='filters'>
@@ -62,6 +74,7 @@
             <label for='weekend'>Disasters</label>
         </div>
     </div>
+-->
 
 </div>
 
@@ -72,7 +85,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRse
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cj498zjq22ml92sqgv7o0goy6',
-    zoom: 2,
+    zoom: 1.2,
     minZoom:1.2,
     maxZoom: 4,
     center: [23.430407, 10.828358]
@@ -81,6 +94,23 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 
 map.on('load', function () {
+    var infos = ['Conflict (new)', 'Conflict (stock)','Disaster'];
+    var colors = ['#f9f15d', '#999999','#61fffc'];
+
+    for (i = 0; i < infos.length; i++) {
+        var info = infos[i];
+        var color = colors[i];
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        var value = document.createElement('span');
+        value.innerHTML = info;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+    }
 
     map.addLayer({
         'id': 'sample',
@@ -116,11 +146,11 @@ map.on('load', function () {
                 'conflict new', '#f9f15d',
                 'disaster new', '#61fffc',
                 //'conflict stock', '#bb7616',
-                /* other */ '#ffffff'
+                /* other */ '#999999'
             ],
             'circle-opacity':0.8
         },
-        filter: ['==', ['number', ['get', 'year']], 2008]
+        filter: ['==', ['number', ['get', 'year']], 2017]
 
     });
 
