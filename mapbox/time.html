@@ -85,7 +85,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaHN3OTgiLCJhIjoiY2oyOXh2dzlxMDAwYzJ3bzcyMnRse
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hsw98/cj498zjq22ml92sqgv7o0goy6',
-    zoom: 1.2,
+    zoom: 1.5,
     minZoom:1.2,
     maxZoom: 4,
     center: [23.430407, 10.828358]
@@ -95,7 +95,7 @@ map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 
 map.on('load', function () {
     var infos = ['Conflict (new)', 'Conflict (stock)','Disaster'];
-    var colors = ['#f9f15d', '#999999','#61fffc'];
+    var colors = ['#f9f15d', '#999999','#58d3cf'];
 
     for (i = 0; i < infos.length; i++) {
         var info = infos[i];
@@ -144,7 +144,7 @@ map.on('load', function () {
                 'match',
                 ['get', 'type'],
                 'conflict new', '#f9f15d',
-                'disaster new', '#61fffc',
+                'disaster new', '#58d3cf',
                 //'conflict stock', '#bb7616',
                 /* other */ '#999999'
             ],
@@ -182,7 +182,7 @@ map.on('click', function(e) {
     // based on the feature found
     var popup = new mapboxgl.Popup()
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <p><b> Detail:</b><br />Country: ' + feature.properties['country'] + ' <br /> Year: ' + feature.properties['year'] + ' <br /> Displacement cases: ' + feature.properties['figure'] + ' </p></div>')
+    .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <p><b>' + feature.properties['country'] + ' </b><br /> Year: ' + feature.properties['year'] + ' <br /> Type: ' + feature.properties['type'] + ' <br /> Total: ' + feature.properties['figure'] + ' </p></div>')
     .addTo(map);
 });
 
