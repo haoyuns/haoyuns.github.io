@@ -51,9 +51,9 @@
 <div id='map'></div>
 
 <div id='console'>
-    <h1>10 Years of Internal Displacement</h1>
+    <!--<h1>10 Years of Internal Displacement</h1>
     <p>In 2017, there were 30.6 million new displacements associated with conflict and disasters across 143 countries and territories.</p>
-
+-->
     <div id='legend'><p><b>Displacement Type</b></p></div>
 
     <div class='session' id='sliderbar'>
@@ -91,7 +91,7 @@ var map = new mapboxgl.Map({
     center: [23.430407, 10.828358]
 });
 
-map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 map.on('load', function () {
     var infos = ['Conflict (new)', 'Conflict (stock)','Disaster'];
