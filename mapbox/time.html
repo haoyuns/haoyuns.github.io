@@ -16,16 +16,16 @@
 
         #console {
             position: absolute;
-            width: 230px;
+            width: 160px;
             margin: 10px;
-            padding: 10px 20px;
+            padding: 10px 20px 50px 20px;
             background-color: white;
             color: #222;
             font-size: 14px;
-            line-height: 19px;
+            line-height: 20px;
         }
 
-        .session { margin-bottom: 20px; }
+        .session { margin-bottom: 10px; }
 
         .legend-key {
             display: inline-block;
@@ -51,30 +51,32 @@
 <div id='map'></div>
 
 <div id='console'>
+    <!--
     <h1>10 Years of Internal Displacement</h1>
     <p>In 2017, there were 30.6 million new displacements associated with conflict and disasters across 143 countries and territories.</p>
-    
+    -->
     <div id='legend'><p><b>Displacement Type</b></p></div>
 
     <div class='session' id='sliderbar'>
         <h2>Year: <label id='active-year'>2017</label></h2>
         <input id='slider' class='row' type='range' min='2008' max='2017' step='1' value='2017' />
     </div>
-    <p><i>Data: <a href='http://www.internal-displacement.org/database/displacement-data'>IDMC</a></i></p>
 
-<!--
     <div class='session'>
-        <h2>Type</h2>
+        <h2>Select</h2>
         <div class='row' id='filters'>
+            <input id='conflicts' type='radio' name='toggle' value='conflicts'>
+            <label for='conflicts'>Conflict (new)</label>
+            <br />
+            <input id='stock' type='radio' name='toggle' value='stock'>
+            <label for='stock'>Conflict (stock)</label>
+            <br />
+            <input id='disasters' type='radio' name='toggle' value='disasters'>
+            <label for='disasters'>Disaster</label>
             <input id='all' type='radio' name='toggle' value='all' checked='checked'>
             <label for='all'>All</label>
-            <input id='weekday' type='radio' name='toggle' value='weekday'>
-            <label for='weekday'>Conflicts</label>
-            <input id='weekend' type='radio' name='toggle' value='weekend'>
-            <label for='weekend'>Disasters</label>
         </div>
     </div>
--->
 
 </div>
 
@@ -96,6 +98,8 @@ map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 map.on('load', function () {
     var infos = ['Conflict (new)', 'Conflict (stock)','Disaster'];
     var colors = ['#f9f15d', '#999999','#58d3cf'];
+    var filterYear = ['==', ['number', ['get', 'year']], 2017];
+    var filterType = ['!=', ['string', ['get', 'type']], 'placeholder'];
 
     for (i = 0; i < infos.length; i++) {
         var info = infos[i];
@@ -148,20 +152,43 @@ map.on('load', function () {
                 //'conflict stock', '#bb7616',
                 /* other */ '#999999'
             ],
-            'circle-opacity':0.8
+            'circle-opacity':0.7
         },
-        filter: ['==', ['number', ['get', 'year']], 2017]
+        //filter: ['==', ['number', ['get', 'year']], 2017]
+        filter: ['all', filterYear, filterType]
 
     });
 
 
     document.getElementById('slider').addEventListener('input', function(e) {
         var year = parseInt(e.target.value);
-        // update the map
-        map.setFilter('sample', ['==', ['number', ['get', 'year']], year]);
+        // update the map--map.setFilter('sample', ['==', ['number', ['get', 'year']], year]);
+        filterYear = ['==', ['number', ['get', 'year']], year];
+        map.setFilter('sample', ['all', filterYear, filterType]);
 
         // update text in the UI
         document.getElementById('active-year').innerText = year;
+    });
+
+    document.getElementById('filters').addEventListener('change', function(e) {
+        var type = e.target.value;
+        // update the map filter
+        if (type === 'all') {
+            filterType = ['!=', ['string', ['get', 'type']], 'placeholder'];
+        } 
+        else if (type === 'conflicts') {
+            filterType = ['match', ['get', 'type'], ['conflict stock','disaster new'], false, true];
+        }
+        else if (type === 'stock') {
+            filterType = ['match', ['get', 'type'], ['conflict new','disaster new'], false, true];
+        }
+        else if (type === 'disasters') {
+            filterType = ['match', ['get', 'type'], ['conflict new','conflict stock'], false, true];
+        }
+        else {
+            console.log('error');
+        }
+        map.setFilter('sample', ['all', filterYear, filterType]);
     });
 
 });
