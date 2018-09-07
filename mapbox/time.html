@@ -66,11 +66,11 @@
         <h2>Selected</h2>
         <div class='row' id='filters'>
             <input id='conflicts' type='radio' name='toggle' value='conflicts'>
-            <label for='conflicts'>Conflict (new)</label>
+            <label for='conflicts'>Conflict</label>
             <br />
-            <input id='stock' type='radio' name='toggle' value='stock'>
+            <!--<input id='stock' type='radio' name='toggle' value='stock'>
             <label for='stock'>Conflict (stock)</label>
-            <br />
+            <br />-->
             <input id='disasters' type='radio' name='toggle' value='disasters'>
             <label for='disasters'>Disaster</label>
             <input id='all' type='radio' name='toggle' value='all' checked='checked'>
@@ -96,8 +96,8 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 map.on('load', function () {
-    var infos = ['Conflict (new)', 'Conflict (stock)','Disaster'];
-    var colors = ['#f9f15d', '#999999','#58d3cf'];
+    var infos = ['Conflict', 'Disaster'];
+    var colors = ['#f9f15d', '#58d3cf'];
     var filterYear = ['==', ['number', ['get', 'year']], 2017];
     var filterType = ['!=', ['string', ['get', 'type']], 'placeholder'];
 
@@ -121,9 +121,9 @@ map.on('load', function () {
         'type': 'circle',
         'source': {
             type: 'vector',
-            url: 'mapbox://hsw98.63hk0ehh'
+            url: 'mapbox://hsw98.5k5trdpy'
         },
-        'source-layer': 'time-4c01td',
+        'source-layer': 'time2-743xro',
         'paint': {
             'circle-radius': [
                 'interpolate',
@@ -149,10 +149,9 @@ map.on('load', function () {
                 ['get', 'type'],
                 'conflict new', '#f9f15d',
                 'disaster new', '#58d3cf',
-                //'conflict stock', '#bb7616',
-                /* other */ '#999999'
+                 /* other */ '#ffffff'
             ],
-            'circle-opacity':0.7
+            'circle-opacity':0.75
         },
         //filter: ['==', ['number', ['get', 'year']], 2017]
         filter: ['all', filterYear, filterType]
@@ -177,13 +176,13 @@ map.on('load', function () {
             filterType = ['!=', ['string', ['get', 'type']], 'placeholder'];
         } 
         else if (type === 'conflicts') {
-            filterType = ['match', ['get', 'type'], ['conflict stock','disaster new'], false, true];
+            filterType = ['match', ['get', 'type'], ['disaster new'], false, true];
         }
-        else if (type === 'stock') {
-            filterType = ['match', ['get', 'type'], ['conflict new','disaster new'], false, true];
-        }
+        //else if (type === 'stock') {
+        //    filterType = ['match', ['get', 'type'], ['conflict new','disaster new'], false, true];
+        //}
         else if (type === 'disasters') {
-            filterType = ['match', ['get', 'type'], ['conflict new','conflict stock'], false, true];
+            filterType = ['match', ['get', 'type'], ['conflict new'], false, true];
         }
         else {
             console.log('error');
