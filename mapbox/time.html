@@ -97,7 +97,7 @@ map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 map.on('load', function () {
     var infos = ['Conflict', 'Disaster'];
-    var colors = ['#f9f15d', '#58d3cf'];
+    var colors = ['#EF7C00', '#008DCA'];
     var filterYear = ['==', ['number', ['get', 'year']], 2017];
     var filterType = ['!=', ['string', ['get', 'type']], 'placeholder'];
 
@@ -147,8 +147,8 @@ map.on('load', function () {
             'circle-color': [
                 'match',
                 ['get', 'type'],
-                'conflict new', '#f9f15d',
-                'disaster new', '#58d3cf',
+                'conflict new', '#EF7C00',
+                'disaster new', '#008DCA',
                  /* other */ '#ffffff'
             ],
             'circle-opacity':0.7
