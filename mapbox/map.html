@@ -104,14 +104,14 @@ map.on('load', function () {
         },
         'source-layer': 'Sample-7u1z39',
         'paint': {           
-            // color circles by ethnicity, using a match expression
+            // color circles by type, using a match expression
             // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
             'circle-color': [
                 'match',
                 ['get', 'displacement_type'],
                 'Conflict', '#f9f15d',
-                'Disaster', '#61fffc',
-                /* other */ '#063a5b'
+                'Disaster', '#61fffc'
+                //,/* other */ '#063a5b'
             ],
             'circle-opacity':0.6,
             'circle-radius': {
