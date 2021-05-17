@@ -210,7 +210,6 @@ header table {
     font-family: 'Poppins', sans-serif;
     font-size:18px;
 }
-
 #contact {
     width:92vw;
     padding:6vh 4vw;
@@ -219,10 +218,6 @@ header table {
     padding:5px 0px;
     border-bottom:4px solid rgb(27, 181, 128);
     width:10%;
-}
-#contact p {
-    font-family: 'Poppins', sans-serif;
-    font-size:18px;
 }
 #contact table {
     width:100%;
@@ -290,10 +285,6 @@ header table {
     font-weight:bold;
 }
 #footer a {
-    color:rgb(27, 181, 128);
-    text-decoration:none;
-}
-#contact a {
     color:rgb(27, 181, 128);
     text-decoration:none;
 }
