@@ -168,7 +168,6 @@ header table {
     background-size:cover;
     background-repeat:no-repeat;
 }
-
 #work {
     width:92vw;
     padding:6vh 4vw;
@@ -179,10 +178,6 @@ header table {
     border-bottom:4px solid rgb(27, 181, 128);
     width:6%;
 }
-
-
-
-
 #photos {
     width:100%;
     columns:3;
@@ -287,6 +282,9 @@ header table {
 #footer a {
     color:rgb(27, 181, 128);
     text-decoration:none;
+}
+.hs a {
+    color:rgb(27, 181, 128);
 }
 ::placeholder {
     color:#000;
