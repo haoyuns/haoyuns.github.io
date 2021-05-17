@@ -206,6 +206,10 @@ header table {
     border-bottom:4px solid rgb(27, 181, 128);
     width:8%;
 }
+#bio p {
+    font-family: 'Poppins', sans-serif;
+    font-size:18px;
+}
 #contact {
     width:92vw;
     padding:6vh 4vw;
