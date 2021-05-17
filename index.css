@@ -208,6 +208,10 @@ header table {
     border-bottom:4px solid rgb(27, 181, 128);
     width:8%;
 }
+#bio h4 {
+    color:rgb(27, 181, 128);
+    font-weight:bold;
+}
 #contact {
     width:92vw;
     padding:6vh 4vw;
