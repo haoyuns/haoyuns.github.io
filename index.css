@@ -195,6 +195,9 @@ header table {
     transform: scale(1.1);
     cursor: pointer;
 }
+#photos a {
+     display: block;
+}
 #bio {
     width:92vw;
     padding:6vh 4vw;
@@ -283,8 +286,9 @@ header table {
     color:rgb(27, 181, 128);
     text-decoration:none;
 }
-.hs a {
+#hs a {
     color:rgb(27, 181, 128);
+    text-decoration:none;
 }
 ::placeholder {
     color:#000;
