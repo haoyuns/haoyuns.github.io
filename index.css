@@ -195,9 +195,7 @@ header table {
     transform: scale(1.1);
     cursor: pointer;
 }
-#photos a {
-     display: block;
-}
+
 #bio {
     width:92vw;
     padding:6vh 4vw;
