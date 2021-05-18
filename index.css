@@ -96,7 +96,7 @@ header table {
     transition:0.4s ease-in-out;
 }
 #navigation a:hover{
-    border-bottom:2px solid #fff;
+    border-bottom:2px solid rgb(27, 181, 128) !important;
 }
 #top_part {
     width:100%;
