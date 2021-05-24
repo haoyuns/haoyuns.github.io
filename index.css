@@ -23,7 +23,7 @@ body {
     animation: rotate 0.56s infinite linear;
     width:50px;
     height:50px;
-    border:12px solid rgb(27, 181, 128);
+    border:12px solid rgb(0, 158, 219);
     border-bottom:12px solid #fff;
     border-radius:50%;
     margin:0;
@@ -70,7 +70,7 @@ header table {
     transition:0.4s ease-in-out;
 }
 #magnify h1:hover{
-    color:rgb(27, 181, 128);
+    color:rgb(0, 158, 219);
     cursor:pointer;
 }
 #img_here {
@@ -82,7 +82,7 @@ header table {
 }
 #logo {
     font-size:24px;
-    color:rgb(27, 181, 128);
+    color:rgb(0, 158, 219);
 }
 #navigation {
     text-align:right;
@@ -96,7 +96,7 @@ header table {
     transition:0.4s ease-in-out;
 }
 #navigation a:hover{
-    border-bottom:2px solid rgb(27, 181, 128) !important;
+    border-bottom:2px solid rgb(0, 158, 219) !important;
 }
 #top_part {
     width:100%;
@@ -127,7 +127,7 @@ header table {
     text-align:left;
 }
 .social {
-    color:rgb(27, 181, 128);
+    color:rgb(0, 158, 219);
     font-size:23px;
     padding:12px 17px;
     border-radius:50%;
@@ -139,15 +139,15 @@ header table {
 .social:hover { 
     cursor: pointer;
     color:#fff;
-    background:rgb(27, 181, 128);
-    box-shadow:0px 10px 30px rgba(27, 181, 128,0.8);
+    background:rgb(0, 158, 219);
+    box-shadow:0px 10px 30px rgba(0, 158, 219,0.8);
 }
 .btn_one {
     font-size:18px;
     font-family: 'Poppins', sans-serif;
-    color:rgb(27, 181, 128);
+    color:rgb(0, 158, 219);
     background:#fff;
-    border:3px solid rgb(27, 181, 128);
+    border:3px solid rgb(0, 158, 219);
     padding:8px 40px;
     width:35%;
     border-radius:80px;
@@ -156,15 +156,15 @@ header table {
     transition:0.4s ease-in-out;
 }
 .btn_one:hover {
-    box-shadow:0px 10px 30px rgba(27, 181, 128, 0.8);
+    box-shadow:0px 10px 30px rgba(0, 158, 219, 0.8);
     cursor:pointer;
     color:#fff;
-    background:rgb(27, 181, 128);
+    background:rgb(0, 158, 219);
 }
 #rightImage {
     width:100%;
     height:95vh;
-    background:linear-gradient(0deg,rgba(27, 181, 128, 0.8),rgba(27, 181, 128, 0.8)),url("https://images.unsplash.com/photo-1584291527905-f930791fb1ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80") center center;
+    background:linear-gradient(0deg,rgba(0, 158, 219, 0.8),rgba(0, 158, 219, 0.8)),url("img/portrait.jpeg") center center;
     background-size:cover;
     background-repeat:no-repeat;
 }
@@ -175,7 +175,7 @@ header table {
 }
 #work h1 {
     padding:5px 0px;
-    border-bottom:4px solid rgb(27, 181, 128);
+    border-bottom:4px solid rgb(0, 158, 219);
     width:6%;
 }
 #photos {
@@ -203,7 +203,7 @@ header table {
 }
 #bio h1 {
     padding:5px 0px;
-    border-bottom:4px solid rgb(27, 181, 128);
+    border-bottom:4px solid rgb(0, 158, 219);
     width:8%;
 }
 
@@ -213,7 +213,7 @@ header table {
 }
 #contact h1 {
     padding:5px 0px;
-    border-bottom:4px solid rgb(27, 181, 128);
+    border-bottom:4px solid rgb(0, 158, 219);
     width:10%;
 }
 #contact table {
@@ -239,7 +239,7 @@ header table {
     margin:20px 1%;
     background:transparent;
     border:0px;
-    border-bottom:3px solid rgba(27, 181, 128,0.5);
+    border-bottom:3px solid rgba(0, 158, 219,0.5);
     padding:8px 10px;
     font-family: 'Poppins', sans-serif;
     font-size:18px;
@@ -252,7 +252,7 @@ header table {
     margin:20px 1%;
     padding:8px 10px;
     border:0px;
-    border-bottom:3px solid rgba(27, 181, 128,0.5);
+    border-bottom:3px solid rgba(0, 158, 219,0.5);
     padding:8px 10px;
     font-family: 'Poppins', sans-serif;
     font-size:18px;
@@ -264,11 +264,11 @@ header table {
 }
 #contact form input:focus {
     outline:none;
-    border-bottom:3px solid rgba(27, 181, 128,1);
+    border-bottom:3px solid rgba(0, 158, 219,1);
 }
 #contact form textarea:focus {
     outline:none;
-    border-bottom:3px solid rgba(27, 181, 128,1);
+    border-bottom:3px solid rgba(0, 158, 219,1);
 }
 #address {
     position:relative;
@@ -282,7 +282,7 @@ header table {
     font-weight:bold;
 }
 #footer a {
-    color:rgb(27, 181, 128);
+    color:rgb(0, 158, 219);
     text-decoration:none;
 }
 ::placeholder {
@@ -345,12 +345,12 @@ button:focus {
     padding:6px 30px;
     width:60%;
     margin:4vh auto;
-    box-shadow:0px 10px 20px rgba(27, 181, 128, 0.8);
-    background:rgb(27, 181, 128);
+    box-shadow:0px 10px 20px rgba(0, 158, 219, 0.8);
+    background:rgb(0, 158, 219);
     color:#fff;
     }
     .btn_one:hover {
-        box-shadow:0px 10px 40px rgba(27, 181, 128, 0.8);
+        box-shadow:0px 10px 40px rgba(0, 158, 219, 0.8);
         cursor:pointer;
     }
     #contact table tr td {
